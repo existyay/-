@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 #include<string>
-#define TElemType string
+#define TElemType char
 using namespace std;
 //二叉树的链表实现 （二叉链表） 
 typedef struct BiTNode {
