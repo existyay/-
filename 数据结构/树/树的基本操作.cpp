@@ -1,14 +1,54 @@
 #include<bits/stdc++.h>
 #include<string>
 #define TElemType char
+#define OK 1
+#define ERROR 0
+typedef int Status;
 using namespace std;
-//二叉树的链表实现 （二叉链表） 
+//二叉树的链表实现 （二叉链表）
 typedef struct BiTNode {
 	TElemType data;
 	BiTNode *lchild;
 	BiTNode *rchild;
 } BiTNode,*BiTree;
+typedef struct QNode {
+	BiTree data;
+	QNode *next;
+} QNode,*QueuePtr;
+typedef struct {
+	QueuePtr front;
+	QueuePtr rear;
+} LinkQueue;
+Status InitQueue(LinkQueue *Q) {
+	Q->front=Q->rear=(QNode*)malloc(sizeof(QNode));
+	if(!Q->front) return ERROR;
+	Q->front->next=Q->rear->next=NULL;
+	return OK;
+}
+typedef BiTree QElemType;
+Status EnQueue(LinkQueue *Q,BiTree e) {
+	QNode* p=(QNode*)malloc(sizeof(QNode));
+	if(!p) return ERROR;
+	p->data=e;
+	p->next=NULL;
+	Q->rear->next=p;
+	Q->rear=p;
+	return OK;
+}
 
+Status DeQueue(LinkQueue *Q,QElemType *e) {
+	if(Q->front==Q->rear) return ERROR;
+	QNode *p=Q->front->next;
+	*e=p->data;
+	Q->front->next=p->next;
+	if(Q->rear==p) Q->rear=Q->front;
+	delete p;
+	return OK;
+}
+Status EmptyQueue(LinkQueue *Q) {
+	if(Q->front==Q->rear) return OK;
+	else return ERROR;
+}
 //创建一个二叉树
 BiTree CreateBiTree() {
 	BiTree T;
@@ -88,12 +128,22 @@ void PostOrderTraverse(BiTree T,void(*visit)(TElemType e)) {
 		visit(T->data);
 	}
 }
-void visit(string e){
+void visit(string e) {
 	cout<<e;
 }
-void LayerOrder(BiTree T,void (*visit)(TElemType)) {
-	;
+void LayerOrder(BiTree T,void(*visit)(TElemType e)) {
+	LinkQueue Q;
+	InitQueue(&Q);
+	if(T)EnQueue(&Q,T);
+	while(!EmptyQueue(&Q)) {
+		DeQueue(&Q,&T);	//队首结点出队
+		visit(T->data);
+		//T的左右孩子入队列
+		if(T->lchild) EnQueue(&Q,T->lchild);
+		if(T->rchild) EnQueue(&Q,T->rchild);
+	}
 }
+
 int main() {
 	;
 }
