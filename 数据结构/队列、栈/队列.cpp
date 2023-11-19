@@ -1,4 +1,4 @@
-//é˜Ÿåˆ—çš„é¡ºåºå­˜å‚¨ç»“æ„
+//¶ÓÁĞµÄË³Ğò´æ´¢½á¹¹
 #include<stdio.h>
 #include<stdlib.h>
 #include<malloc.h>
@@ -12,78 +12,78 @@ typedef struct{
     int front;
     int rear;
 }cycleQueue;
-//åˆå§‹åŒ–
+//³õÊ¼»¯
 Status initQueue(cycleQueue *q){
     q->base=(ElemType *)malloc(MAXSIZE*sizeof(ElemType));
     if(!q->base){
-        printf("åˆå§‹åŒ–å¤±è´¥\n");
+        printf("³õÊ¼»¯Ê§°Ü\n");
         exit(0);
     }
     q->front=q->rear=0;
-    printf("åˆå§‹åŒ–æ“ä½œå®Œæ¯•\n");
+    printf("³õÊ¼»¯²Ù×÷Íê±Ï\n");
 }
-//å…¥é˜Ÿæ“ä½œ
+//Èë¶Ó²Ù×÷
 Status InsertQueue(cycleQueue *q,ElemType e){
     if((q->rear+1)%MAXSIZE==q->front){
-        printf("é˜Ÿåˆ—å·²æ»¡ï¼Œæ— æ³•å…¥é˜Ÿ\n");
+        printf("¶ÓÁĞÒÑÂú£¬ÎŞ·¨Èë¶Ó\n");
         return 0;
     }
     q->base[q->rear]=e;
     q->rear=(q->rear+1)%MAXSIZE;
-    printf("å…¥é˜Ÿå®Œæ¯•\n");
+    printf("Èë¶ÓÍê±Ï\n");
 }
-//å‡ºé˜Ÿæ“ä½œ
+//³ö¶Ó²Ù×÷
 Status DeleteQueue(cycleQueue *q,ElemType &e){
     if(q->front==q->rear){
-        printf("é˜Ÿç©ºï¼Œå‡ºé˜Ÿå¤±è´¥\n");
+        printf("¶Ó¿Õ£¬³ö¶ÓÊ§°Ü\n");
         return 0;
     }
     e=q->base[q->front];
     q->front=(q->front+1)%MAXSIZE;
-    printf("å‡ºé˜Ÿå…ƒç´ å€¼ä¸º:%d\n",e);
-    printf("å‡ºé˜Ÿå®Œæ¯•\n");
+    printf("³ö¶ÓÔªËØÖµÎª:%d\n",e);
+    printf("³ö¶ÓÍê±Ï\n");
 }
-//é”€æ¯é˜Ÿåˆ—
+//Ïú»Ù¶ÓÁĞ
 Status DestroyQueue(cycleQueue *q){
     if(q->base){
         free(q->base);
     }
     q->base=NULL;
     q->front=q->rear=0;
-    printf("é”€æ¯å®Œæ¯•\n");
+    printf("Ïú»ÙÍê±Ï\n");
 }
 int main(){
     int choice=0;
     cycleQueue q;
     while(choice!=5){
-        printf("**********èœå•**********\n");
-        printf("|1.åˆå§‹åŒ–æ“ä½œ   2.é”€æ¯é˜Ÿåˆ—|\n");
-        printf("|3.å…¥é˜Ÿæ“ä½œ     4.å‡ºé˜Ÿæ“ä½œ|\n");
-        printf("|5.é€€å‡ºç¨‹åº|\n");
-        printf("(æ³¨æ„:åœ¨è¿›è¡Œæ“ä½œæ—¶ï¼Œå¿…é¡»æå‰è¿›è¡Œåˆå§‹åŒ–æ“ä½œ)\n");
-        printf("è¯·è¾“å…¥ä½ çš„é€‰æ‹©:");
+        printf("**********²Ëµ¥**********\n");
+        printf("|1.³õÊ¼»¯²Ù×÷   2.Ïú»Ù¶ÓÁĞ|\n");
+        printf("|3.Èë¶Ó²Ù×÷     4.³ö¶Ó²Ù×÷|\n");
+        printf("|5.ÍË³ö³ÌĞò|\n");
+        printf("(×¢Òâ:ÔÚ½øĞĞ²Ù×÷Ê±£¬±ØĞëÌáÇ°½øĞĞ³õÊ¼»¯²Ù×÷)\n");
+        printf("ÇëÊäÈëÄãµÄÑ¡Ôñ:");
         scanf("%d",&choice);
         switch(choice){
             case 1:{
                 initQueue(&q);
-                printf("ç¨‹åºå°†è‡ªåŠ¨è·³è½¬åˆ°èœå•é¡µé¢\n");
+                printf("³ÌĞò½«×Ô¶¯Ìø×ªµ½²Ëµ¥Ò³Ãæ\n");
                 Sleep(1000);
                 system("cls");
                 break;
             }
             case 2:{
                 DestroyQueue(&q);
-                printf("ç¨‹åºå°†è‡ªåŠ¨è·³è½¬åˆ°èœå•é¡µé¢\n");
+                printf("³ÌĞò½«×Ô¶¯Ìø×ªµ½²Ëµ¥Ò³Ãæ\n");
                 Sleep(1000);
                 system("cls");
                 break;
             }
             case 3:{
                 int e;
-                printf("è¯·è¾“å…¥è¦å…¥é˜Ÿå…ƒç´ çš„å€¼:");
+                printf("ÇëÊäÈëÒªÈë¶ÓÔªËØµÄÖµ:");
                 scanf("%d",&e);
                 InsertQueue(&q,e);
-                printf("ç¨‹åºå°†è‡ªåŠ¨è·³è½¬åˆ°èœå•é¡µé¢\n");
+                printf("³ÌĞò½«×Ô¶¯Ìø×ªµ½²Ëµ¥Ò³Ãæ\n");
                 Sleep(1000);
                 system("cls");
                 break;
@@ -91,13 +91,13 @@ int main(){
             case 4:{
                 int *e;
                 DeleteQueue(&q,*e);
-                printf("ç¨‹åºå°†è‡ªåŠ¨è·³è½¬åˆ°èœå•é¡µé¢\n");
+                printf("³ÌĞò½«×Ô¶¯Ìø×ªµ½²Ëµ¥Ò³Ãæ\n");
                 Sleep(1000);
                 system("cls");
                 break;
             }
             case 5:{
-                printf("ç¨‹åºé€€å‡º\n");
+                printf("³ÌĞòÍË³ö\n");
                 system("cls");
                 break;
             }
@@ -105,4 +105,5 @@ int main(){
     }
     return 0;
 }
+
 
