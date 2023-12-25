@@ -14,7 +14,7 @@ typedef struct {
 	int length;
 	int listsize;
 } SqList;
-/*³õÊ¼»¯Ë³Ğò±í*/
+/*åˆå§‹åŒ–é¡ºåºè¡¨*/
 int InitList(SqList *L) {
 	L->elem=(ElemType *)malloc(LIST_INIT_SIZE *sizeof(ElemType));
 	if(!L->elem) return 0;
@@ -23,24 +23,24 @@ int InitList(SqList *L) {
 	return 1;
 }
 //Status InitList(SqList &L){
-//	L.elem=new ElemType[MAXSIZE];
+//	L.elem=new ElemType[LIST_INIT_SIZE];
 //	if(!L.elem) exit(OVERFLOW);
 //	L.length=0;
 //	return OK;
 //}
-/*È¡Öµ*/
+/*å–å€¼*/
 Status GetElem(SqList L,int i,ElemType &e) {
 	if(i<1||i>L.length) return ERROR;
 	e=L.elem[i-1];
 	return OK;
 }
-/*²éÕÒ*/
+/*æŸ¥æ‰¾*/
 int LocateElem(SqList L,ElemType e) {
 	for(int i=0; i<L.length; i++)
 		if(L.elem[i]==e) return i+1;
 	return 0;
 }
-/*²åÈë*/
+/*æ’å…¥*/
 int ListInsert_sq(SqList *L,int i,ElemType e) {
 	if((i<1)||(i>L->length+1)) return ERROR;
 	if(L->length>=L->listsize) {
@@ -65,7 +65,7 @@ int ListInsert_sq(SqList *L,int i,ElemType e) {
 //	++L.length;
 //	return OK;
 //}
-/*É¾³ı*/
+/*åˆ é™¤*/
 int ListDelete_sq(SqList *L,int i,ElemType *e) {
 	int k;
 	if((i<1)||(i>L->length)) return ERROR;
@@ -85,8 +85,8 @@ int ListDelete_sq(SqList *L,int i,ElemType *e) {
 //	return 1;
 //}
 
-/*²éÕÒ*/
-//1.°´Öµ²éÕÒ
+/*æŸ¥æ‰¾*/
+//1.æŒ‰å€¼æŸ¥æ‰¾
 int LocateElem_sq(SqList L,ElemType e,int(*compare)(ElemType,ElemType)) {
 	int i;
 	for(i=0; i<L.length; i++) {
@@ -97,13 +97,13 @@ int LocateElem_sq(SqList L,ElemType e,int(*compare)(ElemType,ElemType)) {
 		return 0;
 	else return i+1;
 }
-//2.°´Î»²éÕÒ
+//2.æŒ‰ä½æŸ¥æ‰¾
 int GetElem_sq(SqList *L,int i,ElemType *e) {
 	if(i<1||i>L->length) return ERROR;
 	*e=L->elem[i-1];
 	return OK;
 }
-/*Ïú»ÙË³Ğò±í*/
+/*é”€æ¯é¡ºåºè¡¨*/
 Status DestoryList(SqList &L){
 	free(L.elem);
 	L.elem=NULL;
@@ -111,14 +111,14 @@ Status DestoryList(SqList &L){
 	L.listsize=0;
 	return OK;
 } 
-/*ÖÃ¿ÕÏßĞÔ±í*/
+/*ç½®ç©ºçº¿æ€§è¡¨*/
 Status ClearList(SqList *L){
 	if(!L->length==0){
 		L->length=0;
 	}
 	return OK;
 }
-/*·ÃÎÊË³Ğò±í*/
+/*è®¿é—®é¡ºåºè¡¨*/
 Status Travese_sq(SqList L,void(*visit)(ElemType)){
 	for(int i=0;i<L.length;i++){
 		visit(L.elem[i]); 
