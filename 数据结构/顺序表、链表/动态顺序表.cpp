@@ -14,7 +14,7 @@ typedef struct {
 	int length;
 	int listsize;
 } SqList;
-/*åˆå§‹åŒ–é¡ºåºè¡¨*/
+/*³õÊ¼»¯Ë³Ğò±í*/
 int InitList(SqList *L) {
 	L->elem=(ElemType *)malloc(LIST_INIT_SIZE *sizeof(ElemType));
 	if(!L->elem) return 0;
@@ -28,19 +28,19 @@ int InitList(SqList *L) {
 //	L.length=0;
 //	return OK;
 //}
-/*å–å€¼*/
+/*È¡Öµ*/
 Status GetElem(SqList L,int i,ElemType &e) {
 	if(i<1||i>L.length) return ERROR;
 	e=L.elem[i-1];
 	return OK;
 }
-/*æŸ¥æ‰¾*/
+/*²éÕÒ*/
 int LocateElem(SqList L,ElemType e) {
 	for(int i=0; i<L.length; i++)
 		if(L.elem[i]==e) return i+1;
 	return 0;
 }
-/*æ’å…¥*/
+/*²åÈë*/
 int ListInsert_sq(SqList *L,int i,ElemType e) {
 	if((i<1)||(i>L->length+1)) return ERROR;
 	if(L->length>=L->listsize) {
@@ -65,7 +65,7 @@ int ListInsert_sq(SqList *L,int i,ElemType e) {
 //	++L.length;
 //	return OK;
 //}
-/*åˆ é™¤*/
+/*É¾³ı*/
 int ListDelete_sq(SqList *L,int i,ElemType *e) {
 	int k;
 	if((i<1)||(i>L->length)) return ERROR;
@@ -85,8 +85,8 @@ int ListDelete_sq(SqList *L,int i,ElemType *e) {
 //	return 1;
 //}
 
-/*æŸ¥æ‰¾*/
-//1.æŒ‰å€¼æŸ¥æ‰¾
+/*²éÕÒ*/
+//1.°´Öµ²éÕÒ
 int LocateElem_sq(SqList L,ElemType e,int(*compare)(ElemType,ElemType)) {
 	int i;
 	for(i=0; i<L.length; i++) {
@@ -97,13 +97,13 @@ int LocateElem_sq(SqList L,ElemType e,int(*compare)(ElemType,ElemType)) {
 		return 0;
 	else return i+1;
 }
-//2.æŒ‰ä½æŸ¥æ‰¾
+//2.°´Î»²éÕÒ
 int GetElem_sq(SqList *L,int i,ElemType *e) {
 	if(i<1||i>L->length) return ERROR;
 	*e=L->elem[i-1];
 	return OK;
 }
-/*é”€æ¯é¡ºåºè¡¨*/
+/*Ïú»ÙË³Ğò±í*/
 Status DestoryList(SqList &L){
 	free(L.elem);
 	L.elem=NULL;
@@ -111,14 +111,14 @@ Status DestoryList(SqList &L){
 	L.listsize=0;
 	return OK;
 } 
-/*ç½®ç©ºçº¿æ€§è¡¨*/
+/*ÖÃ¿ÕÏßĞÔ±í*/
 Status ClearList(SqList *L){
 	if(!L->length==0){
 		L->length=0;
 	}
 	return OK;
 }
-/*è®¿é—®é¡ºåºè¡¨*/
+/*·ÃÎÊË³Ğò±í*/
 Status Travese_sq(SqList L,void(*visit)(ElemType)){
 	for(int i=0;i<L.length;i++){
 		visit(L.elem[i]); 

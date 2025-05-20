@@ -13,24 +13,24 @@ typedef struct LNode{
 void visit(int e){
 	printf("%d",e);
 } 
-//初始化单链表 
+//��ʼ�������� 
 Status InitList(LinkList L){
 	L=(LNode*)malloc(sizeof(LNode*));
 	L->next=NULL;
 	return OK;
 }
-//遍历单链表 
+//���������� 
 Status TraveList(LinkList L,void(*visit(ElemType))){
 	LinkList p=L->next;
 	while(p){
 		p=p->next;
 		visit(p->data);
 	}
-	//遍历一遍p表格打印所有的数据域 
+	//����һ��p�����ӡ���е������� 
 	return OK;
 }
 
-//单链表查找（按值查找）
+//���������ң���ֵ���ң�
 Status LocateElem(LinkList L,ElemType &e){
 	LinkList p=L->next;
 	int j=1;
@@ -38,15 +38,15 @@ Status LocateElem(LinkList L,ElemType &e){
 		p=p->next;
 		j++;
 	}
-	//找前驱，并且用j记录下相同的元素的位序 
+	//��ǰ����������j��¼����ͬ��Ԫ�ص�λ�� 
 	if(!p||j<1) return ERROR;
 	return j; 
-	//直接返回位序的值 
+	//ֱ�ӷ���λ���ֵ 
 } 
 
 Status ListEmpty(LinkList L){
 	return L->next==NULL?1:0;
-	//置空链表 
+	//�ÿ����� 
 } 
 
 void DestroyList(LinkList &L){
@@ -55,13 +55,13 @@ void DestroyList(LinkList &L){
 		p=L;
 		L=p->next;
 		free(p);
-		//循环删除指针域的值 
+		//ѭ��ɾ��ָ�����ֵ 
 	}
 	L=NULL;
-	//将链表也置空 
+	//������Ҳ�ÿ� 
 } 
 
-//单链表查找（按位查找）
+//���������ң���λ���ң�
 Status GetElem(LinkList L,int i,ElemType &e){
 	LinkList p=L->next;
 	int j=1;
@@ -69,13 +69,13 @@ Status GetElem(LinkList L,int i,ElemType &e){
 		p=p->next;
 		j++;
 	}
-	//找前驱，j记录位序，找到该位停止否则报错 
+	//��ǰ����j��¼λ���ҵ���λֹͣ���򱨴� 
 	if(!p||i<1) return ERROR;
 	e=p->data;
-	//取得该位的数据域 
+	//ȡ�ø�λ�������� 
 	return OK;
 } 
-//单链表插入
+//����������
 Status Insert(LinkList &L,int i,ElemType &e){
 	LinkList p=L,s;
 	int j=0;
@@ -83,15 +83,15 @@ Status Insert(LinkList &L,int i,ElemType &e){
 		p=p->next;
 		j++;
 	}
-	//找前驱，j记录位序，插入可以插到表尾后一位所以p&&j<i-1 
+	//��ǰ����j��¼λ�򣬲�����Բ嵽��β��һλ����p&&j<i-1 
 	s=(LinkList)malloc(sizeof(LNode));
 	s->data=e;
 	s->next=p->next;
 	p->next=s;
-	//插入的结点前后指针连接 
+	//����Ľ��ǰ��ָ������ 
 	return OK;
 }
-//单链表删除
+//������ɾ��
 Status Delete(LinkList &L,int i,ElemType &e){
 	LinkList p=L,q;
 	int j=0;
@@ -99,13 +99,13 @@ Status Delete(LinkList &L,int i,ElemType &e){
 		p=p->next;
 		j++;
 	}
-	//找前驱，j记录位序，删除不可以删到表尾后一位所以p->next&&j<i-1 
+	//��ǰ����j��¼λ��ɾ��������ɾ����β��һλ����p->next&&j<i-1 
 	if(!(p->next||i<1))return 0;
 	q=p->next;
 	p->next=q->next;
 	e=q->data;
 	free(q);
-	//删除的结点断开连接，并且释放q 
+	//ɾ���Ľ��Ͽ����ӣ������ͷ�q 
 	return OK;
 }
 

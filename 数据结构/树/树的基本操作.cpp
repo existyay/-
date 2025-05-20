@@ -5,7 +5,7 @@
 #define ERROR 0
 typedef int Status;
 using namespace std;
-//äºŒå‰æ ‘çš„é“¾è¡¨å®žçŽ° ï¼ˆäºŒå‰é“¾è¡¨ï¼‰
+//¶þ²æÊ÷µÄÁ´±íÊµÏÖ £¨¶þ²æÁ´±í£©
 typedef struct BiTNode {
 	TElemType data;
 	BiTNode *lchild;
@@ -49,7 +49,7 @@ Status EmptyQueue(LinkQueue *Q) {
 	if(Q->front==Q->rear) return OK;
 	else return ERROR;
 }
-//åˆ›å»ºä¸€ä¸ªäºŒå‰æ ‘
+//´´½¨Ò»¸ö¶þ²æÊ÷
 BiTree CreateBiTree() {
 	BiTree T;
 	char ch;
@@ -64,7 +64,7 @@ BiTree CreateBiTree() {
 	}
 	return T;
 }
-//æ±‚å˜é‡Lå­˜æ”¾ç»“ç‚¹çš„å±‚æ¬¡
+//Çó±äÁ¿L´æ·Å½áµãµÄ²ã´Î
 void layer(BiTree T,int L) {
 	if(T) {
 		L++;
@@ -73,7 +73,7 @@ void layer(BiTree T,int L) {
 		layer(T->rchild,L);
 	}
 }
-//Leafçš„nodeæ•°ç›®
+//LeafµÄnodeÊýÄ¿
 void countLeaf(BiTree T,int *sum) {
 	if(T) {
 		if(!T->lchild&&!T->rchild)
@@ -82,7 +82,7 @@ void countLeaf(BiTree T,int *sum) {
 		countLeaf(T->rchild,sum);
 	}
 }
-//åˆ†åˆ«è®¡ç®—äºŒå‰æ ‘ä¸­åº¦ä¸º0ï¼Œåº¦ä¸º1ï¼Œåº¦ä¸º2çš„Nodeæ•°
+//·Ö±ð¼ÆËã¶þ²æÊ÷ÖÐ¶ÈÎª0£¬¶ÈÎª1£¬¶ÈÎª2µÄNodeÊý
 void countLeaf(BiTree T,int *s0,int *s1,int *s2) {
 	if(T) {
 		if(!T->lchild&&!T->rchild)
@@ -95,7 +95,7 @@ void countLeaf(BiTree T,int *s0,int *s1,int *s2) {
 		countLeaf(T->rchild,s0,s1,s2);
 	}
 }
-//æ±‚äºŒå‰æ ‘çš„æ·±åº¦
+//Çó¶þ²æÊ÷µÄÉî¶È
 void Deepth(BiTree T,int L,int *h) {
 	if(T) {
 		L++;
@@ -104,7 +104,7 @@ void Deepth(BiTree T,int L,int *h) {
 		Deepth(T->rchild,L,h);
 	}
 }
-//å…ˆåºéåŽ†ç®—æ³•
+//ÏÈÐò±éÀúËã·¨
 void PreOrderTraverse(BiTree T,void(*visit)(TElemType e)) {
 	if(T) {
 		visit(T->data);
@@ -112,7 +112,7 @@ void PreOrderTraverse(BiTree T,void(*visit)(TElemType e)) {
 		PreOrderTraverse(T->rchild,visit);
 	}
 }
-//ä¸­åºéåŽ†ç®—æ³•
+//ÖÐÐò±éÀúËã·¨
 void InOrderTraverse(BiTree T,void(*visit)(TElemType e)) {
 	if(T) {
 		InOrderTraverse(T->lchild,visit);
@@ -120,7 +120,7 @@ void InOrderTraverse(BiTree T,void(*visit)(TElemType e)) {
 		InOrderTraverse(T->rchild,visit);
 	}
 }
-//åŽåºéåŽ†ç®—æ³•
+//ºóÐò±éÀúËã·¨
 void PostOrderTraverse(BiTree T,void(*visit)(TElemType e)) {
 	if(T) {
 		PostOrderTraverse(T->lchild,visit);
@@ -136,9 +136,9 @@ void LayerOrder(BiTree T,void(*visit)(TElemType e)) {
 	InitQueue(&Q);
 	if(T)EnQueue(&Q,T);
 	while(!EmptyQueue(&Q)) {
-		DeQueue(&Q,&T);	//é˜Ÿé¦–ç»“ç‚¹å‡ºé˜Ÿ
+		DeQueue(&Q,&T);	//¶ÓÊ×½áµã³ö¶Ó
 		visit(T->data);
-		//Tçš„å·¦å³å­©å­å…¥é˜Ÿåˆ—
+		//TµÄ×óÓÒº¢×ÓÈë¶ÓÁÐ
 		if(T->lchild) EnQueue(&Q,T->lchild);
 		if(T->rchild) EnQueue(&Q,T->rchild);
 	}
